@@ -1,0 +1,406 @@
+{
+  "ingredientes": [
+    {
+      "nome": "ABACAXI",
+      "unidade": "g",
+      "conteudo": 1.0,
+      "preco_unitario": 10.0
+    },
+    {
+      "nome": "ABACAXI QUADRADO",
+      "unidade": "g",
+      "conteudo": 1000.0,
+      "preco_unitario": 15.0
+    },
+    {
+      "nome": "AÇÚCAR DE CONFEITEIRO",
+      "unidade": "g",
+      "conteudo": 1000.0,
+      "preco_unitario": 6.0
+    },
+    {
+      "nome": "AÇÚCAR MASCAVO",
+      "unidade": "g",
+      "conteudo": 1000.0,
+      "preco_unitario": 5.0
+    },
+    {
+      "nome": "ADESIVO",
+      "unidade": "und",
+      "conteudo": 1000.0,
+      "preco_unitario": 90.0
+    },
+    {
+      "nome": "ADESIVO/SACO HIGIENICO",
+      "unidade": "und",
+      "conteudo": 200.0,
+      "preco_unitario": 200.0
+    },
+    {
+      "nome": "AIPIM",
+      "unidade": "g",
+      "conteudo": 1000.0,
+      "preco_unitario": 2.5
+    },
+    {
+      "nome": "AIPIM RALADO",
+      "unidade": "g",
+      "conteudo": 1000.0,
+      "preco_unitario": 5.0
+    },
+    {
+      "nome": "AMENDOIM",
+      "unidade": "g",
+      "conteudo": 1.0,
+      "preco_unitario": 0.0
+    },
+    {
+      "nome": "BAUNILHA",
+      "unidade": "g",
+      "conteudo": 200.0,
+      "preco_unitario": 24.0
+    },
+    {
+      "nome": "BLOSSONS",
+      "unidade": "und",
+      "conteudo": 1.0,
+      "preco_unitario": 0.0
+    },
+    {
+      "nome": "CACAU BLACK",
+      "unidade": "und",
+      "conteudo": 1.0,
+      "preco_unitario": 0.0
+    },
+    {
+      "nome": "CACAU EM PÓ",
+      "unidade": "und",
+      "conteudo": 1.0,
+      "preco_unitario": 0.0
+    },
+    {
+      "nome": "CENOURA",
+      "unidade": "und",
+      "conteudo": 1.0,
+      "preco_unitario": 0.0
+    },
+    {
+      "nome": "CHOCOLATE",
+      "unidade": "g",
+      "conteudo": 500.0,
+      "preco_unitario": 29.0
+    },
+    {
+      "nome": "CHOCOLATE 50%",
+      "unidade": "und",
+      "conteudo": 1.0,
+      "preco_unitario": 0.0
+    },
+    {
+      "nome": "CHOCOLATE AO LEITE",
+      "unidade": "und",
+      "conteudo": 1.0,
+      "preco_unitario": 0.0
+    },
+    {
+      "nome": "CHOCOLATE BRANCO",
+      "unidade": "und",
+      "conteudo": 1.0,
+      "preco_unitario": 0.0
+    },
+    {
+      "nome": "CHOCOLATE MEIO AMARGO",
+      "unidade": "und",
+      "conteudo": 1.0,
+      "preco_unitario": 0.0
+    },
+    {
+      "nome": "COCO RALADO",
+      "unidade": "g",
+      "conteudo": 1000.0,
+      "preco_unitario": 30.0
+    },
+    {
+      "nome": "CORANTE ALIMENTÍCIO",
+      "unidade": "und",
+      "conteudo": 1.0,
+      "preco_unitario": 0.0
+    },
+    {
+      "nome": "CREME DE LEITE",
+      "unidade": "g",
+      "conteudo": 200.0,
+      "preco_unitario": 2.5
+    },
+    {
+      "nome": "CREME DE LEITE FRESCO",
+      "unidade": "und",
+      "conteudo": 1.0,
+      "preco_unitario": 0.0
+    },
+    {
+      "nome": "EMBALAGEM",
+      "unidade": "und",
+      "conteudo": 50.0,
+      "preco_unitario": 70.0
+    },
+    {
+      "nome": "FARINHA",
+      "unidade": "g",
+      "conteudo": 1000.0,
+      "preco_unitario": 4.0
+    },
+    {
+      "nome": "FARINHA DE AMÊNDOAS",
+      "unidade": "und",
+      "conteudo": 1.0,
+      "preco_unitario": 0.0
+    },
+    {
+      "nome": "FARINHA DE TRIGO",
+      "unidade": "und",
+      "conteudo": 1.0,
+      "preco_unitario": 0.0
+    },
+    {
+      "nome": "FERMENTO",
+      "unidade": "g",
+      "conteudo": 200.0,
+      "preco_unitario": 3.0
+    },
+    {
+      "nome": "FITA",
+      "unidade": "cm",
+      "conteudo": 1000.0,
+      "preco_unitario": 30.0
+    },
+    {
+      "nome": "GELADINHO",
+      "unidade": "und",
+      "conteudo": 1.0,
+      "preco_unitario": 0.0
+    },
+    {
+      "nome": "GELATO LATTE",
+      "unidade": "und",
+      "conteudo": 1.0,
+      "preco_unitario": 38.0
+    },
+    {
+      "nome": "GELEIA DE MORANGO",
+      "unidade": "g",
+      "conteudo": 250.0,
+      "preco_unitario": 6.0
+    },
+    {
+      "nome": "GRANULADO",
+      "unidade": "und",
+      "conteudo": 1.0,
+      "preco_unitario": 0.0
+    },
+    {
+      "nome": "LAÇO JUNINO",
+      "unidade": "und",
+      "conteudo": 100.0,
+      "preco_unitario": 20.0
+    },
+    {
+      "nome": "LEITE CONDENSADO",
+      "unidade": "g",
+      "conteudo": 395.0,
+      "preco_unitario": 5.5
+    },
+    {
+      "nome": "LEITE DE COCO",
+      "unidade": "l",
+      "conteudo": 500.0,
+      "preco_unitario": 8.0
+    },
+    {
+      "nome": "LEITE EM PÓ",
+      "unidade": "g",
+      "conteudo": 750.0,
+      "preco_unitario": 35.0
+    },
+    {
+      "nome": "LEITE UHT",
+      "unidade": "ml",
+      "conteudo": 1000.0,
+      "preco_unitario": 5.0
+    },
+    {
+      "nome": "MANTEIGA",
+      "unidade": "und",
+      "conteudo": 1.0,
+      "preco_unitario": 0.0
+    },
+    {
+      "nome": "MARGARINA",
+      "unidade": "g",
+      "conteudo": 3000.0,
+      "preco_unitario": 159.0
+    },
+    {
+      "nome": "MORANGO",
+      "unidade": "und",
+      "conteudo": 1.0,
+      "preco_unitario": 0.0
+    },
+    {
+      "nome": "NUTELLA",
+      "unidade": "g",
+      "conteudo": 695.0,
+      "preco_unitario": 42.0
+    },
+    {
+      "nome": "ÓLEO",
+      "unidade": "und",
+      "conteudo": 1.0,
+      "preco_unitario": 0.0
+    },
+    {
+      "nome": "OVOS",
+      "unidade": "und",
+      "conteudo": 30.0,
+      "preco_unitario": 14.0
+    },
+    {
+      "nome": "PUBA",
+      "unidade": "g",
+      "conteudo": 1000.0,
+      "preco_unitario": 5.0
+    },
+    {
+      "nome": "QUEIJO RALADO",
+      "unidade": "g",
+      "conteudo": 100.0,
+      "preco_unitario": 3.0
+    },
+    {
+      "nome": "SACO DE GELADINHO 6X26",
+      "unidade": "und",
+      "conteudo": 100.0,
+      "preco_unitario": 3.75
+    },
+    {
+      "nome": "SACOLA DE TRANSPORTE",
+      "unidade": "und",
+      "conteudo": 100.0,
+      "preco_unitario": 10.0
+    },
+    {
+      "nome": "SAL",
+      "unidade": "g",
+      "conteudo": 1000.0,
+      "preco_unitario": 3.0
+    },
+    {
+      "nome": "SACO BOOP HIGIENICO",
+      "unidade": "und",
+      "conteudo": 250.0,
+      "preco_unitario": 19.0
+    },
+    {
+      "nome": "GELEIA DE MORANGO",
+      "unidade": "g",
+      "conteudo": 300.0,
+      "preco_unitario": 15.0
+    },
+    {
+      "nome": "OREO",
+      "unidade": "G",
+      "conteudo": 100.0,
+      "preco_unitario": 5.0
+    }
+  ],
+  "mao_obra": {
+    "salario_mensal": 3500,
+    "dias_trabalho_mes": 25,
+    "horas_trabalho_dia": 10,
+    "horas_mes": 250,
+    "valor_hora": 14,
+    "valor_minuto": 0.233
+  },
+  "custos_fixos": {
+    "agua": {
+      "valor": 50,
+      "divide_casa": true,
+      "custo_producao": 20.83
+    },
+    "luz": {
+      "valor": 350,
+      "divide_casa": true,
+      "custo_producao": 145.83
+    },
+    "gas": {
+      "valor": 60,
+      "divide_casa": false,
+      "custo_producao": 60
+    },
+    "aluguel": {
+      "valor": 800,
+      "divide_casa": false,
+      "custo_producao": 800
+    },
+    "combustivel": {
+      "valor": 200,
+      "divide_casa": false,
+      "custo_producao": 200
+    },
+    "internet": {
+      "valor": 150,
+      "divide_casa": false,
+      "custo_producao": 150
+    },
+    "insumos_apoio": {
+      "valor": 100,
+      "divide_casa": false,
+      "custo_producao": 100
+    },
+    "investimentos": {
+      "valor": 200,
+      "divide_casa": false,
+      "custo_producao": 200
+    },
+    "impostos": {
+      "valor": 70,
+      "divide_casa": false,
+      "custo_producao": 70
+    }
+  },
+  "receitas": [
+    {
+      "nome": "Ninho com Nutella",
+      "rendimento": 15,
+      "tempo_producao": 30,
+      "custo_material": 37.56,
+      "custo_mao_obra": 7,
+      "custos_fixos": 7.79,
+      "custo_total": 52.35,
+      "margem_lucro": 0.5,
+      "preco_final": 119.79
+    },
+    {
+      "nome": "Ninho com Geleia de Morango",
+      "rendimento": 15,
+      "tempo_producao": 30,
+      "custo_material": 29.33,
+      "custo_mao_obra": 7,
+      "custos_fixos": 7.79,
+      "custo_total": 44.12,
+      "margem_lucro": 0.78,
+      "preco_final": 99.91
+    },
+    {
+      "nome": "Ninho com Oreo",
+      "rendimento": 15,
+      "tempo_producao": 30,
+      "custo_material": 37.13,
+      "custo_mao_obra": 7,
+      "custos_fixos": 7.79,
+      "custo_total": 51.92,
+      "margem_lucro": 0.5,
+      "preco_final": 99.08
+    }
+  ]
+}

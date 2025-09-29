@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Geladinhos Gourmet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar de Navegação -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-snowflake"></i> Geladinhos Pro</h2>
+                <button class="menu-toggle" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#" data-section="dashboard" class="active"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+                <li><a href="#" data-section="clientes"><i class="fas fa-users"></i> <span>Clientes</span></a></li>
+                <li><a href="#" data-section="estoque"><i class="fas fa-boxes"></i> <span>Estoque</span></a></li>
+                <li><a href="#" data-section="produtos"><i class="fas fa-ice-cream"></i> <span>Produtos</span></a></li>
+                <li><a href="#" data-section="taxa-entrega"><i class="fas fa-truck"></i> <span>Taxa Entrega</span></a></li>
+                <li><a href="#" data-section="eventos"><i class="fas fa-calendar-alt"></i> <span>Eventos</span></a></li>
+                <li><a href="#" data-section="relatorios"><i class="fas fa-chart-line"></i> <span>Relatórios</span></a></li>
+                <li><a href="#" data-section="metas"><i class="fas fa-trophy"></i> <span>Metas</span></a></li>
+                <li><a href="#" data-section="configuracoes"><i class="fas fa-cogs"></i> <span>Configurações</span></a></li>
+            </ul>
+        </nav>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content">
+            <!-- Dashboard -->
+            <section id="dashboard" class="section active">
+                <h1>Dashboard</h1>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon"><i class="fas fa-dollar-sign"></i></div>
+                        <div class="metric-info">
+                            <h3>Receita do Mês</h3>
+                            <p class="metric-value" id="receita-mes">R$ 0,00</p>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon"><i class="fas fa-receipt"></i></div>
+                        <div class="metric-info">
+                            <h3>Despesas do Mês</h3>
+                            <p class="metric-value" id="despesas-mes">R$ 0,00</p>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="metric-info">
+                            <h3>Lucro Líquido</h3>
+                            <p class="metric-value" id="lucro-liquido">R$ 0,00</p>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon"><i class="fas fa-users"></i></div>
+                        <div class="metric-info">
+                            <h3>Total de Clientes</h3>
+                            <p class="metric-value" id="total-clientes">0</p>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon"><i class="fas fa-shopping-cart"></i></div>
+                        <div class="metric-info">
+                            <h3>Vendas do Mês</h3>
+                            <p class="metric-value" id="total-vendas-mes">0 <span style="font-size: 0.7em; color: var(--color-text-secondary);">unidades</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Novo Card: Salário Brenda -->
+                <div class="salario-brenda-card">
+                    <h3><i class="fas fa-user-tie"></i> Salário Brenda</h3>
+                    <div class="salario-config">
+                        <div class="form-group">
+                            <label class="form-label">Porcentagem do Lucro (%)</label>
+                            <input type="number" class="form-control" id="brenda-porcentagem" min="0" max="100" step="0.1" placeholder="15">
+                        </div>
+                        <div class="salario-info">
+                            <div class="salario-item">
+                                <span>Lucro Líquido:</span>
+                                <span id="lucro-para-brenda">R$ 0,00</span>
+                            </div>
+                            <div class="salario-item total">
+                                <span>Salário Brenda:</span>
+                                <span id="salario-brenda-valor">R$ 0,00</span>
+                            </div>
+                            <div class="salario-item">
+                                <span>Lucro Após Salário:</span>
+                                <span id="lucro-apos-brenda">R$ 0,00</span>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn--primary" id="salvar-brenda-config">Salvar Configuração</button>
+                    </div>
+                </div>
+
+                <!-- Botões de Atalho -->
+                <div class="shortcuts-card">
+                    <h3>Ações Rápidas</h3>
+                    <div class="shortcuts-grid">
+                        <button class="shortcut-btn" data-action="clientes">
+                            <div class="shortcut-icon"><i class="fas fa-user-plus"></i></div>
+                            <span>Cadastrar Cliente</span>
+                        </button>
+                        <button class="shortcut-btn" data-action="produtos">
+                            <div class="shortcut-icon"><i class="fas fa-plus-circle"></i></div>
+                            <span>Cadastrar Produto</span>
+                        </button>
+                        <button class="shortcut-btn" data-action="eventos">
+                            <div class="shortcut-icon"><i class="fas fa-calendar-plus"></i></div>
+                            <span>Adicionar Evento</span>
+                        </button>
+                        <button class="shortcut-btn" data-action="backup">
+                            <div class="shortcut-icon"><i class="fas fa-download"></i></div>
+                            <span>Fazer Backup</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="card dashboard-card">
+                        <h3>Últimas 5 Transações</h3>
+                        <div id="ultimas-transacoes">
+                            <p class="empty-state">Nenhuma transação registrada</p>
+                        </div>
+                    </div>
+                    <div class="card dashboard-card">
+                        <h3>Produtos Mais Vendidos</h3>
+                        <div id="produtos-vendidos">
+                            <p class="empty-state">Nenhum produto vendido ainda</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <h3>Receitas vs Despesas</h3>
+                    <canvas id="receitas-despesas-chart" style="height: 300px;"></canvas>
+                </div>
+            </section>
+
+            <!-- Clientes -->
+            <section id="clientes" class="section">
+                <h1>Gestão de Clientes</h1>
+
+                <div class="form-card">
+                    <h3>Adicionar Cliente</h3>
+                    <form id="cliente-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Nome Completo</label>
+                                <input type="text" class="form-control" id="cliente-nome" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Telefone</label>
+                                <input type="tel" class="form-control" id="cliente-telefone" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Endereço</label>
+                            <input type="text" class="form-control" id="cliente-endereco">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Aniversário</label>
+                                <input type="date" class="form-control" id="cliente-aniversario">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Como nos conheceu</label>
+                                <select class="form-control" id="cliente-origem">
+                                    <option value="">Selecione...</option>
+                                    <option value="Facebook">Facebook</option>
+                                    <option value="Indicação">Indicação</option>
+                                    <option value="Instagram">Instagram</option>
+                                    <option value="Outros">Outros</option>
+                                    <option value="WhatsApp">WhatsApp</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Observações</label>
+                            <textarea class="form-control" id="cliente-observacoes" rows="3"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <button type="submit" class="btn btn--primary">Adicionar Cliente</button>
+                            <button type="button" class="btn btn--secondary hidden" id="cancelar-edicao-cliente">Cancelar Edição</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-card">
+                    <h3>Lista de Clientes</h3>
+                    <div class="search-bar">
+                        <input type="text" class="form-control" id="buscar-cliente" placeholder="Buscar cliente...">
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Telefone</th>
+                                    <th>Origem</th>
+                                    <th>Total Gasto</th>
+                                    <th>Última Compra</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clientes-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Estoque -->
+            <section id="estoque" class="section">
+                <h1>Controle de Estoque</h1>
+
+                <!-- Novo Frame: Total Geral em Estoque -->
+                <div class="estoque-total-card">
+                    <h3><i class="fas fa-chart-bar"></i> Total Geral em Estoque</h3>
+                    <div class="estoque-total-info">
+                        <div class="total-number">
+                            <span class="total-label">Total de Geladinhos</span>
+                            <span class="total-value" id="total-geral-estoque">0</span>
+                            <span class="total-unit">unidades</span>
+                        </div>
+                        <div class="estoque-chart-container" style="position: relative; height: 250px;">
+                            <canvas id="estoque-total-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visualização Híbrida do Estoque -->
+                <div class="estoque-visualizacao">
+                    <h3>Estoque Atual</h3>
+                    <div id="estoque-cards" class="estoque-cards-grid">
+                        <!-- Cards com quantidade e barras serão gerados via JS -->
+                    </div>
+                </div>
+
+                <div class="form-card">
+                    <h3>Registrar Produção</h3>
+                    <form id="estoque-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Produto</label>
+                                <select class="form-control" id="estoque-produto" required>
+                                    <option value="">Selecione um produto...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Quantidade Produzida</label>
+                                <input type="number" class="form-control" id="estoque-quantidade" min="1" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Data de Produção</label>
+                            <input type="date" class="form-control" id="estoque-data" required>
+                        </div>
+                        <div class="calculation-preview" id="estoque-preview" style="display: none;">
+                            <div class="calc-item">
+                                <span>Valor de Entradas:</span>
+                                <span id="valor-entradas">R$ 0,00</span>
+                            </div>
+                            <div class="calc-item">
+                                <span>Valor de Despesas:</span>
+                                <span id="valor-despesas">R$ 0,00</span>
+                            </div>
+                            <div class="calc-item total">
+                                <span>Lucro Líquido:</span>
+                                <span id="lucro-producao">R$ 0,00</span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn--primary">Registrar Produção</button>
+                    </form>
+                </div>
+
+                <div class="table-card">
+                    <h3>Histórico de Produções</h3>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Produto</th>
+                                    <th>Quantidade</th>
+                                    <th>Valor Entradas</th>
+                                    <th>Valor Despesas</th>
+                                    <th>Lucro</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="estoque-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Produtos -->
+            <section id="produtos" class="section">
+                <h1>Cadastro de Produtos</h1>
+
+                <div class="form-card">
+                    <h3>Adicionar Produto</h3>
+                    <form id="produto-form">
+                        <div class="form-group">
+                            <label class="form-label">Nome do Produto</label>
+                            <input type="text" class="form-control" id="produto-nome" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Custo por Unidade (R$)</label>
+                                <input type="number" class="form-control" id="produto-custo" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Lucro por Unidade (R$)</label>
+                                <input type="number" class="form-control" id="produto-lucro" step="0.01" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Valor Final (Calculado Automaticamente)</label>
+                            <input type="text" class="form-control" id="produto-valor-final" readonly>
+                        </div>
+                        <div class="form-row">
+                            <button type="submit" class="btn btn--primary">Adicionar Produto</button>
+                            <button type="button" class="btn btn--secondary hidden" id="cancelar-edicao-produto">Cancelar Edição</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-card">
+                    <h3>Lista de Produtos</h3>
+                    <div class="search-bar">
+                        <input type="text" class="form-control" id="buscar-produto" placeholder="Buscar produto...">
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Custo</th>
+                                    <th>Lucro</th>
+                                    <th>Valor Final</th>
+                                    <th>Margem</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="produtos-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Taxa de Entrega -->
+            <section id="taxa-entrega" class="section">
+                <h1>Taxa de Entrega por Bairro</h1>
+
+                <div class="form-card">
+                    <h3>Adicionar Bairro</h3>
+                    <form id="bairro-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Nome do Bairro</label>
+                                <input type="text" class="form-control" id="bairro-nome" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Valor da Entrega (R$)</label>
+                                <input type="number" class="form-control" id="bairro-valor" step="0.01" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn--primary">Adicionar Bairro</button>
+                    </form>
+                </div>
+
+                <div class="table-card">
+                    <h3>Lista de Bairros</h3>
+                    <div class="search-bar">
+                        <input type="text" class="form-control" id="buscar-bairro" placeholder="Buscar bairro...">
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Bairro</th>
+                                    <th>Valor da Entrega</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bairros-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Eventos Financeiros -->
+            <section id="eventos" class="section">
+                <h1>Eventos Financeiros</h1>
+
+                <div class="form-card">
+                    <h3>Registrar Evento</h3>
+                    <form id="evento-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Tipo de Evento</label>
+                                <select class="form-control" id="evento-tipo" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="BRINDES">BRINDES</option>
+                                    <option value="DESPESAS">DESPESAS</option>
+                                    <option value="ENTRADAS">ENTRADAS</option>
+                                    <option value="IMPOSTOS">IMPOSTOS</option>
+                                    <option value="OUTROS">OUTROS</option>
+                                    <option value="VENDAS">VENDAS</option>
+                                    <option value="VENDAS-IFOOD">VENDAS iFOOD</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Data</label>
+                                <input type="date" class="form-control" id="evento-data" required>
+                            </div>
+                        </div>
+                        <div id="evento-vendas-fields" style="display: none;">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Cliente</label>
+                                    <div class="select-with-search">
+                                        <input type="text" class="form-control" id="evento-cliente-search" placeholder="Digite para buscar cliente...">
+                                        <select class="form-control" id="evento-cliente" size="4" style="display: none;">
+                                            <option value="">Selecione um cliente...</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Tipo de Entrega</label>
+                                    <select class="form-control" id="evento-entrega">
+                                        <option value="retirada">Retirada</option>
+                                        <option value="entrega">Entrega</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Tipo de Pagamento</label>
+                                    <select class="form-control" id="evento-pagamento">
+                                        <option value="pix">PIX</option>
+                                        <option value="dinheiro">Dinheiro Físico</option>
+                                        <option value="cartao">Cartão via Link</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" id="taxa-cartao-field" style="display: none;">
+                                    <label class="form-label">Taxa do Cartão</label>
+                                    <div style="display: flex; gap: 8px;">
+                                        <select class="form-control" id="taxa-cartao-tipo" style="flex: 0 0 80px;">
+                                            <option value="percentual">%</option>
+                                            <option value="fixo">R$</option>
+                                        </select>
+                                        <input type="number" class="form-control" id="taxa-cartao-valor" step="0.01" min="0" placeholder="0">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="bairro-entrega" style="display: none;">
+                                <div class="form-group">
+                                    <label class="form-label">Bairro</label>
+                                    <div class="select-with-search">
+                                        <input type="text" class="form-control" id="evento-bairro-search" placeholder="Digite para buscar bairro...">
+                                        <select class="form-control" id="evento-bairro" size="4" style="display: none;">
+                                            <option value="">Selecione um bairro...</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Campo de Desconto - só para VENDAS -->
+                            <div id="desconto-field" style="display: none;">
+                                <div class="form-group">
+                                    <label class="form-label">Desconto (%)</label>
+                                    <input type="number" class="form-control" id="evento-desconto" min="0" max="100" step="0.1" placeholder="0">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Produtos</label>
+                                <div id="produtos-venda"></div>
+                                <button type="button" class="btn btn--secondary" id="adicionar-produto-venda">
+                                    <i class="fas fa-plus"></i> Adicionar Produto
+                                </button>
+                            </div>
+                            <!-- Subtotal em tempo real -->
+                            <div class="subtotal-preview" id="subtotal-preview" style="display: none;">
+                                <div class="calc-item subtotal-item">
+                                    <span>Subtotal dos Produtos:</span>
+                                    <span id="subtotal-produtos">R$ 0,00</span>
+                                </div>
+                                <div class="calc-item subtotal-item" id="desconto-display" style="display: none;">
+                                    <span>Desconto:</span>
+                                    <span id="valor-desconto">R$ 0,00</span>
+                                </div>
+                                <div class="calc-item subtotal-item">
+                                    <span>Taxa de Entrega:</span>
+                                    <span id="taxa-entrega-valor">R$ 0,00</span>
+                                </div>
+                                <div class="calc-item subtotal-item" id="taxa-cartao-display" style="display: none;">
+                                    <span>Taxa do Cartão:</span>
+                                    <span id="valor-taxa-cartao">R$ 0,00</span>
+                                </div>
+                                <div class="calc-item total">
+                                    <span>Total Geral:</span>
+                                    <span id="total-geral">R$ 0,00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="evento-outros-fields">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Categoria</label>
+                                    <select class="form-control" id="evento-categoria">
+                                        <option value="">Selecione...</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Valor (R$)</label>
+                                    <input type="number" class="form-control" id="evento-valor" step="0.01">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Descrição</label>
+                                <input type="text" class="form-control" id="evento-descricao">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn--primary">Registrar Evento</button>
+                    </form>
+                </div>
+
+                <div class="table-card">
+                    <h3>Histórico de Eventos</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Pesquisar</label>
+                            <input type="text" class="form-control" id="pesquisa-eventos" placeholder="Buscar por cliente, descrição...">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Filtrar por Tipo</label>
+                            <select class="form-control" id="filtro-evento-tipo">
+                                <option value="">Todos os tipos</option>
+                                <option value="BRINDES">BRINDES</option>
+                                <option value="DESPESAS">DESPESAS</option>
+                                <option value="ENTRADAS">ENTRADAS</option>
+                                <option value="IMPOSTOS">IMPOSTOS</option>
+                                <option value="OUTROS">OUTROS</option>
+                                <option value="VENDAS">VENDAS</option>
+                                <option value="VENDAS-IFOOD">VENDAS iFOOD</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Data Inicial</label>
+                            <input type="date" class="form-control" id="filtro-data-inicio">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Data Final</label>
+                            <input type="date" class="form-control" id="filtro-data-fim">
+                        </div>
+                        <div class="form-group" style="align-self: end;">
+                            <button type="button" class="btn btn--secondary" id="limpar-filtros-eventos">Limpar Filtros</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Tipo</th>
+                                    <th>Cliente</th>
+                                    <th>Descrição</th>
+                                    <th>Valor</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="eventos-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Relatórios -->
+            <section id="relatorios" class="section">
+                <h1>Relatórios e Análises</h1>
+
+                <div class="filter-card">
+                    <h3>Filtros Avançados</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Período</label>
+                            <select class="form-control" id="relatorio-periodo">
+                                <option value="hoje">Hoje</option>
+                                <option value="semana-atual">Semana Atual</option>
+                                <option value="mes-atual">Mês Atual</option>
+                                <option value="mes-passado">Mês Passado</option>
+                                <option value="ultimo-trimestre">Último Trimestre</option>
+                                <option value="personalizado">Personalizado</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Data Inicial</label>
+                            <input type="date" class="form-control" id="relatorio-data-inicio">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Data Final</label>
+                            <input type="date" class="form-control" id="relatorio-data-fim">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Tipo de Evento</label>
+                            <select class="form-control" id="relatorio-tipo-evento">
+                                <option value="">Todos os Tipos</option>
+                                <option value="VENDAS">VENDAS</option>
+                                <option value="BRINDES">BRINDES</option>
+                                <option value="VENDAS-IFOOD">VENDAS iFOOD</option>
+                                <option value="ENTRADAS">ENTRADAS</option>
+                                <option value="DESPESAS">DESPESAS</option>
+                                <option value="IMPOSTOS">IMPOSTOS</option>
+                                <option value="OUTROS">OUTROS</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Categoria Específica</label>
+                            <select class="form-control" id="relatorio-categoria" disabled>
+                                <option value="">Todas as Categorias</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <button type="button" class="btn btn--primary" id="gerar-relatorio">Gerar Relatório</button>
+                        <button type="button" class="btn btn--secondary" id="exportar-relatorio-xls" disabled>
+                            <i class="fas fa-download"></i> Exportar XLS
+                        </button>
+                    </div>
+                </div>
+
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <h3>Resumo Financeiro</h3>
+                        <div id="resumo-financeiro">
+                            <div class="summary-item">
+                                <span>Total Receitas:</span>
+                                <span id="relatorio-receitas">R$ 0,00</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Total Despesas:</span>
+                                <span id="relatorio-despesas">R$ 0,00</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Lucro Líquido:</span>
+                                <span id="relatorio-lucro">R$ 0,00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="report-card">
+                        <h3>Detalhamento por Categoria</h3>
+                        <div id="detalhamento-categorias">
+                            <p class="empty-state">Gere um relatório para ver os dados</p>
+                        </div>
+                    </div>
+
+                    <div class="report-card">
+                        <h3>Produtos Mais Vendidos (Top 10)</h3>
+                        <div id="produtos-mais-vendidos">
+                            <p class="empty-state">Gere um relatório para ver os dados</p>
+                        </div>
+                    </div>
+
+                    <div class="report-card">
+                        <h3>Detalhamento Completo de Produtos</h3>
+                        <div id="todos-produtos-vendidos">
+                            <p class="empty-state">Gere um relatório para ver os dados</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Metas -->
+            <section id="metas" class="section">
+                <h1>Metas e Objetivos</h1>
+
+                <div class="form-card">
+                    <h3>Definir Metas</h3>
+                    <form id="metas-form">
+                        <div class="metas-tabs">
+                            <button type="button" class="meta-tab active" data-tab="receita">Receita</button>
+                            <button type="button" class="meta-tab" data-tab="vendas">Vendas</button>
+                            <button type="button" class="meta-tab" data-tab="despesas">Despesas</button>
+                        </div>
+
+                        <!-- Metas de Receita -->
+                        <div id="metas-receita" class="meta-content active">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Meta de Receita Mensal (R$)</label>
+                                    <input type="number" class="form-control" id="meta-receita" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Limite de Despesas Mensais (R$)</label>
+                                    <input type="number" class="form-control" id="meta-despesas" step="0.01">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Novas Metas de Vendas -->
+                        <div id="metas-vendas" class="meta-content">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Meta Diária (unidades)</label>
+                                    <input type="number" class="form-control" id="meta-vendas-diaria" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Meta Semanal (unidades)</label>
+                                    <input type="number" class="form-control" id="meta-vendas-semanal" min="0">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Meta Mensal (unidades)</label>
+                                <input type="number" class="form-control" id="meta-vendas-mensal" min="0">
+                            </div>
+                        </div>
+
+                        <!-- Metas de Despesas -->
+                        <div id="metas-despesas" class="meta-content">
+                            <div class="form-group">
+                                <label class="form-label">Categoria para Limite</label>
+                                <select class="form-control" id="meta-categoria">
+                                    <option value="">Todas as categorias</option>
+                                    <option value="2R/Motoqueiro">2R/Motoqueiro</option>
+                                    <option value="Ingredientes">Ingredientes</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="Outros">Outros</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn--primary">Salvar Metas</button>
+                    </form>
+                </div>
+
+                <!-- Progresso das Metas de Receita -->
+                <div class="metas-progress">
+                    <div class="progress-card">
+                        <h3>Progresso da Meta de Receita</h3>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-receita"></div>
+                        </div>
+                        <div class="progress-info">
+                            <span id="receita-atual">R$ 0,00</span>
+                            <span>/</span>
+                            <span id="meta-receita-display">R$ 0,00</span>
+                        </div>
+                    </div>
+                    <div class="progress-card">
+                        <h3>Controle de Despesas</h3>
+                        <div class="progress-bar">
+                            <div class="progress-fill warning" id="progress-despesas"></div>
+                        </div>
+                        <div class="progress-info">
+                            <span id="despesas-atual">R$ 0,00</span>
+                            <span>/</span>
+                            <span id="limite-despesas-display">R$ 0,00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Novas Metas de Vendas - Progresso -->
+                <div class="vendas-metas-progress">
+                    <div class="metas-vendas-grid">
+                        <div class="progress-card">
+                            <h3>Meta Diária de Vendas</h3>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-vendas-diaria"></div>
+                            </div>
+                            <div class="progress-info">
+                                <span id="vendas-hoje">0</span>
+                                <span>/</span>
+                                <span id="meta-vendas-diaria-display">0</span>
+                                <span>unidades</span>
+                            </div>
+                        </div>
+                        <div class="progress-card">
+                            <h3>Meta Semanal de Vendas</h3>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-vendas-semanal"></div>
+                            </div>
+                            <div class="progress-info">
+                                <span id="vendas-semana">0</span>
+                                <span>/</span>
+                                <span id="meta-vendas-semanal-display">0</span>
+                                <span>unidades</span>
+                            </div>
+                        </div>
+                        <div class="progress-card">
+                            <h3>Meta Mensal de Vendas</h3>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-vendas-mensal"></div>
+                            </div>
+                            <div class="progress-info">
+                                <span id="vendas-mes">0</span>
+                                <span>/</span>
+                                <span id="meta-vendas-mensal-display">0</span>
+                                <span>unidades</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Configurações -->
+            <section id="configuracoes" class="section">
+                <h1>Configurações</h1>
+
+                <div class="config-grid">
+                    <!-- Backup e Restauração -->
+                    <div class="config-card">
+                        <h3><i class="fas fa-database"></i> Backup e Restauração</h3>
+                        <div class="config-actions">
+                            <button type="button" class="btn btn--primary" id="fazer-backup">
+                                <i class="fas fa-download"></i> Fazer Backup
+                            </button>
+                            <div class="import-section">
+                                <label for="importar-backup" class="btn btn--secondary">
+                                    <i class="fas fa-upload"></i> Importar Backup
+                                </label>
+                                <input type="file" id="importar-backup" accept=".json" style="display: none;">
+                            </div>
+                            <button type="button" class="btn btn--outline btn--danger" id="resetar-sistema">
+                                <i class="fas fa-trash-restore"></i> Resetar Sistema
+                            </button>
+                        </div>
+                        <div class="backup-info">
+                            <p><small><i class="fas fa-info-circle"></i> O backup inclui todos os dados: clientes, produtos, eventos e configurações.</small></p>
+                        </div>
+                    </div>
+
+                    <!-- Estatísticas Gerais -->
+                    <div class="config-card">
+                        <h3><i class="fas fa-chart-bar"></i> Estatísticas Gerais</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-number" id="total-clientes-config">0</div>
+                                <div class="stat-label">Total de Clientes</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="total-produtos-config">0</div>
+                                <div class="stat-label">Total de Produtos</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="total-eventos-config">0</div>
+                                <div class="stat-label">Total de Eventos</div>
+                            </div>
+                        </div>
+                        <div class="last-update">
+                            <p><small>Última atualização: <span id="ultima-atualizacao">--</span></small></p>
+                        </div>
+                    </div>
+
+                    <!-- Configurações Avançadas -->
+                    <div class="config-card">
+                        <h3><i class="fas fa-cogs"></i> Configurações Avançadas</h3>
+                        <form id="config-avancadas-form">
+                            <div class="form-group">
+                                <label class="form-label">Nome da Empresa</label>
+                                <input type="text" class="form-control" id="nome-empresa" value="Geladinhos Gourmet">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Categoria Personalizada</label>
+                                <input type="text" class="form-control" id="categoria-personalizada" placeholder="Ex: Taxa do Cartão">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Formato da Moeda</label>
+                                <select class="form-control" id="formato-moeda">
+                                    <option value="BRL">Real Brasileiro (R$)</option>
+                                    <option value="USD">Dólar Americano ($)</option>
+                                    <option value="EUR">Euro (€)</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn--primary">Salvar Configurações</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal de Confirmação -->
+    <div id="confirm-modal" class="modal">
+        <div class="modal-content">
+            <h3 id="modal-title">Confirmação</h3>
+            <p id="confirm-message"></p>
+            <div class="modal-actions">
+                <button type="button" class="btn btn--secondary" id="confirm-cancel">Cancelar</button>
+                <button type="button" class="btn btn--primary" id="confirm-ok">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Cliente Detalhes -->
+    <div id="cliente-modal" class="modal">
+        <div class="modal-content modal-large">
+            <h3 id="cliente-modal-title">Detalhes do Cliente</h3>
+            <div id="cliente-modal-body"></div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn--secondary" id="cliente-modal-close">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Edição de Evento -->
+    <div id="edit-evento-modal" class="modal">
+        <div class="modal-content modal-large">
+            <h3>Editar Evento</h3>
+            <form id="edit-evento-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Tipo</label>
+                        <select class="form-control" id="edit-evento-tipo" required>
+                            <option value="VENDAS">VENDAS</option>
+                            <option value="BRINDES">BRINDES</option>
+                            <option value="VENDAS-IFOOD">VENDAS iFOOD</option>
+                            <option value="ENTRADAS">ENTRADAS</option>
+                            <option value="DESPESAS">DESPESAS</option>
+                            <option value="IMPOSTOS">IMPOSTOS</option>
+                            <option value="OUTROS">OUTROS</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Data</label>
+                        <input type="date" class="form-control" id="edit-evento-data" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Valor (R$)</label>
+                        <input type="number" step="0.01" class="form-control" id="edit-evento-valor" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Categoria</label>
+                        <select class="form-control" id="edit-evento-categoria">
+                            <option value="">Selecione uma categoria</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Descrição</label>
+                    <input type="text" class="form-control" id="edit-evento-descricao">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn--secondary" id="cancel-edit-evento">Cancelar</button>
+                    <button type="submit" class="btn btn--primary">Atualizar Evento</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
